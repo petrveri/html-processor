@@ -1,0 +1,37 @@
+<configuration debug="true" scan="true" scanPeriod="10 seconds">
+  <!-- Include environment-specific property file -->
+  <property resource="logback-test.properties" />
+  <property name="logback.rollingPattern" value="%d{yyyy-MM-dd}.gz" />
+
+  <jmxConfigurator />
+
+  <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <Pattern>%d{HH:mm:ss.SSS} %-5level %logger{35} - %msg %n</Pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>TRACE</level>
+    </filter>
+  </appender>
+
+  <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${logback.logdir}/app.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${logback.logdir}/app.log.${logback.rollingPattern}</fileNamePattern>
+      <maxHistory>${logback.maxHistory}</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <Pattern>%d{HH:mm:ss.SSS} %-5level %logger{35} - %msg %n</Pattern>
+    </encoder>
+  </appender>
+
+  <logger name="org.petrveri" additivity="false">
+    <level value="${logback.loglevel:-INFO}" />
+    <appender-ref ref="dailyRollingFileAppender"/>
+    <appender-ref ref="consoleAppender" />
+  </logger>
+
+  <root level="${logback.root.loglevel:-INFO}">
+    <appender-ref ref="consoleAppender" />
+  </root>
+</configuration>
