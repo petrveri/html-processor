@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class CharFileReader {
     private String filePath;
+    private final int bufferSize = 256 * 1024;
 
     public CharFileReader(String filePath) {
         this.filePath = filePath;
@@ -37,7 +38,6 @@ public class CharFileReader {
 
     private StringBuilder readContent(BufferedReader reader) throws IOException {
         StringBuilder sb = new StringBuilder();
-        int bufferSize = 256*1024;
         char[] chars = new char[bufferSize];
         int charsRead;
         do {

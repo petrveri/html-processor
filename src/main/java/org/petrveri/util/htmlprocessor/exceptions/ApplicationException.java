@@ -7,8 +7,7 @@ public class ApplicationException extends RuntimeException {
     private Throwable throwable;
     private String customMessage;
 
-    public ApplicationException(Throwable throwable)
-    {
+    public ApplicationException(Throwable throwable) {
         this.throwable = throwable;
     }
 
@@ -16,8 +15,7 @@ public class ApplicationException extends RuntimeException {
         this.customMessage = customMessage;
     }
 
-    public ApplicationException(Throwable throwable, String customMessage)
-    {
+    public ApplicationException(Throwable throwable, String customMessage) {
         this.throwable = throwable;
         this.customMessage = customMessage;
     }

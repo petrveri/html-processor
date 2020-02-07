@@ -11,7 +11,7 @@ import java.util.List;
 public class HtmlTag {
     private String beginWord;
     private String endWord;
-    ArrayList<Pair<String, String>> filterAttributes = new ArrayList<>();
+    private ArrayList<Pair<String, String>> filterAttributes = new ArrayList<>();
 
     public HtmlTag(String beginWord, String endWord) {
         this.setBeginWord(beginWord);
@@ -21,7 +21,7 @@ public class HtmlTag {
     public HtmlTag(String beginWord, String endWord, String filterAttrName, String filterAttrValue) {
         this.setBeginWord(beginWord);
         this.setEndWord(endWord);
-        this.filterAttributes.add(new Pair<> (filterAttrName, filterAttrValue));
+        this.filterAttributes.add(new Pair<>(filterAttrName, filterAttrValue));
     }
 
     public HtmlTag(String beginWord, String endWord, List<Pair<String, String>> filterAttributes) {
@@ -48,5 +48,9 @@ public class HtmlTag {
 
     public ArrayList<Pair<String, String>> getFilterAttributes() {
         return filterAttributes;
+    }
+
+    public void setFilterAttributes(ArrayList<Pair<String, String>> filterAttributes) {
+        this.filterAttributes = filterAttributes;
     }
 }

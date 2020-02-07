@@ -1,6 +1,5 @@
 package org.petrveri.util.htmlprocessor.parsing;
 
-import org.apache.commons.lang3.StringUtils;
 import org.petrveri.util.htmlprocessor.config.AppConfig;
 import org.petrveri.util.htmlprocessor.config.ConfigKeys;
 import org.petrveri.util.htmlprocessor.config.DefaultConfig;
@@ -22,7 +21,7 @@ import java.util.List;
 @Component
 public class FileProcessor {
 
-    final public static String WILD_CARD = "*.html";
+    public static final String WILD_CARD = "*.html";
 
     @Inject
     private AppConfig appConfig;
@@ -96,8 +95,9 @@ public class FileProcessor {
         if (isFileWildCard(inputFileName)) {
             List<String> fileList = fileSystem.getFilesList(inputDirPath, inputFileName);
             if (fileList.size() > 0) {
-                logger.info("Found {} file(s) by mask [{}] in the input directory [{}].", fileList.size(), WILD_CARD, inputDirPath);
-                for(String fileName : fileList) {
+                logger.info("Found {} file(s) by mask [{}] in the input directory [{}].",
+                        fileList.size(), WILD_CARD, inputDirPath);
+                for (String fileName : fileList) {
                     processFile(fileSystem.joinPathParts(inputDirPath, fileName),
                             fileSystem.joinPathParts(outputDirPath, fileName));
                 }
