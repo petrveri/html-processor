@@ -65,10 +65,8 @@ public class FileSystem {
         if (StringUtils.isBlank(pathName)) {
             return "";
         }
-        if (isExist(pathName)) {
-            if (isDirectory(pathName)) {
-                return "";
-            }
+        if (isExist(pathName) && isDirectory(pathName)) {
+            return "";
         }
         int lastIndexOfDelimiter = getLastIndexOfDelimiter(pathName);
         if (lastIndexOfDelimiter > -1) {
@@ -121,7 +119,12 @@ public class FileSystem {
 
     public String joinPathParts(String leftPart, String rightPart) {
         char lastChar = leftPart.charAt(leftPart.length() - 1);
-        String format = lastChar == '/' || lastChar == '\\' ? "%s%s" : "%s/%s";
+        String format;
+        if (lastChar == '/' || lastChar == '\\') {
+            format = "%s%s";
+        } else {
+            format = "%s/%s";
+        }
         return String.format(format, leftPart, rightPart);
     }
 

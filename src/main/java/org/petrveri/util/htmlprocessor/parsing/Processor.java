@@ -15,6 +15,7 @@ import java.util.List;
 public class Processor {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final int wordLength = 5;
 
     public void process(StringBuilder document, List<HtmlTag> tags) {
         for (HtmlTag tag : tags) {
@@ -24,7 +25,7 @@ public class Processor {
 
     private void process(StringBuilder document, HtmlTag tag) {
         logger.info("Process tag [{}...]. Initial document length is {} character(s).",
-                tag.getBeginWord().substring(0, Math.min(tag.getBeginWord().length(), 5)), document.length());
+                tag.getBeginWord().substring(0, Math.min(tag.getBeginWord().length(), wordLength)), document.length());
         int tagBegInd = document.indexOf(tag.getBeginWord());
         while (tagBegInd > -1) {
             int tagEndInd = document.indexOf(tag.getEndWord(), tagBegInd + tag.getBeginWord().length());
